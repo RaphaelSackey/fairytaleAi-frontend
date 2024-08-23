@@ -1,0 +1,21 @@
+name: Vitest CI
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  unit_component_test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+      with:
+          node-version: lts/*
+      - name: Install dependencies
+        run: npm ci
+      - name: Run tests
+        run: npm run test:unit
